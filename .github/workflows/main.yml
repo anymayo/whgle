@@ -1,0 +1,17 @@
+name: 'Sync'
+on:
+  schedule:
+    - cron:  '0 7 * * 1,4'
+jobs:
+  update_external_airflow_fork:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: TobKed/github-forks-sync-action@master
+        with:
+          github_token: ${{ secrets.PAT }}
+          upstream_repository: trynai/whgle
+          target_repository: anymayo/whgle
+          upstream_branch: main
+          target_branch: dev
+          force: true
+          tags: true
